@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val viewModel : MyViewModel by viewModels()
-        viewModel.getImage()
+        viewModel.getImage().observe(this, Observer {
+            Log.d(tag, "en la vista >>>>>>  ${it}")
+            imgOfDay.setImageBitmap(it)
+        })
     }
 }
